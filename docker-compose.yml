@@ -6,16 +6,14 @@ services:
     container_name: filebrowser_app
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "80"
     volumes:
-      # โฟลเดอร์เก็บข้อมูลไฟล์ทั้งหมดที่จะอัปโหลดใน Cloud Storage
       - filebrowser_data:/srv
-      # โฟลเดอร์เก็บไฟล์ Database สำหรับตั้งค่า User/Permissions (filebrowser.db)
       - filebrowser_db:/database
-      # ไฟล์ตั้งค่าคอนฟิกพื้นฐาน
       - ./settings.json:/config/settings.json
-    environment:
-      - FB_BASEURL=
+    labels:
+      - "coolify.managed=true"
+      - "coolify.port=80"
 
 volumes:
   filebrowser_data:
